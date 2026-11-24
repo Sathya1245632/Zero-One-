@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #06070a;
+  --bg-1: #0b0d13;
+  --surface-1: #10131c;
+  --surface-2: #161a26;
+  --surface-3: #1e2434;
+  --ink: #f8fafc;
+  --ink-2: #cbd5e1;
+  --muted: #94a3b8;
+  --muted-strong: #e2e8f0;
+  --line: rgba(255, 255, 255, 0.12);
+  --line-2: rgba(255, 255, 255, 0.08);
+  --line-3: rgba(255, 255, 255, 0.2);
+  --red: #ff334b;
+  --red-deep: #be123c;
+  --red-dot: #ff4d63;
+  --fdr-accent: #f97316;
+  --spring: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html {
+  background-color: #06070a;
+  color: #f8fafc;
+  font-family: 'Archivo', system-ui, -apple-system, sans-serif;
+  scroll-behavior: auto;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: #06070a;
+  color: #f8fafc;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+.font-display {
+  font-family: 'Space Grotesk', 'Archivo', system-ui, sans-serif;
+}
+
+/* Accessible visible keyboard focus rings (UI/UX Pro Max) */
+:focus-visible {
+  outline: 2px solid #ff334b;
+  outline-offset: 2px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #06070a;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.24);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+/* Editorial tight display tracking */
+.tracking-editorial {
+  letter-spacing: -0.045em;
+  line-height: 1.03;
+}
+
+.tracking-head {
+  letter-spacing: -0.035em;
+  line-height: 1.06;
+}
+
+/* Infinite Horizontal Discipline Marquee */
+@keyframes marquee {
+  0% {
+    transform: translate3d(0%, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Orbiting Footer Project Ring */
+@keyframes orbitRing {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-orbit-ring {
+  animation: orbitRing 75s linear infinite;
+}
+
+/* Counter-rotate tiles so they remain upright or gently angled along the ring */
+@keyframes orbitCounter {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+/* Roll button text hover micro-interaction */
+.roll-text {
+  position: relative;
+  display: inline-flex;
+  overflow: hidden;
+  line-height: 1.25;
+}
+
+.roll-text-inner {
+  display: inline-flex;
+  flex-direction: column;
+  transition: transform 420ms var(--spring);
+}
+
+.group:hover .roll-text-inner,
+.roll-trigger:hover .roll-text-inner {
+  transform: translateY(-50%);
+}
+
+/* 3D Perspective Laptop Screen */
+.laptop-screen-3d {
+  transform: perspective(1200px) rotateX(6deg) rotateY(-5deg) rotateZ(0.8deg);
+  transform-style: preserve-3d;
+  transition: transform 700ms var(--spring);
+}
+
+@media (min-width: 640px) {
+  .laptop-screen-3d {
+    transform: perspective(1200px) rotateX(12deg) rotateY(-14deg) rotateZ(2deg);
+  }
+}
+
+.laptop-stage:hover .laptop-screen-3d {
+  transform: perspective(1200px) rotateX(5deg) rotateY(-6deg) rotateZ(0.5deg) scale(1.015);
+}
+
+/* Reduced motion accessibility (UI/UX Pro Max) */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-orbit-ring {
+    animation: none !important;
+  }
+  .roll-text-inner,
+  .laptop-screen-3d {
+    transition: none !important;
+  }
+}
+
+/* Subtle noise grain overlay for editorial richness */
+.bg-noise {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
