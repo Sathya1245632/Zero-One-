@@ -16,244 +16,185 @@ export const ProjectMockup: React.FC<ProjectMockupProps> = ({
   const isLight = project.bgTone === 'light';
   const isWarm = project.bgTone === 'warm';
 
-  const bgGradient = isLight
-    ? 'bg-gradient-to-br from-[#fafafa] via-[#f0f1f3] to-[#e4e6eb] text-black'
+  const fallbackBg = isLight
+    ? 'bg-[#f1f3f5] text-[#0F172A]'
     : isWarm
-    ? 'bg-gradient-to-br from-[#231b15] via-[#17120e] to-[#0b0907] text-[#f4f4f2]'
-    : 'bg-gradient-to-br from-[#161618] via-[#0d0d0e] to-[#050506] text-[#f4f4f2]';
+    ? 'bg-[#17120e] text-[#F8FAFC]'
+    : 'bg-[#0b0d13] text-[#F8FAFC]';
 
-  return (
-    <div
-      className={`relative w-full h-full overflow-hidden flex flex-col justify-between p-4 ${bgGradient}`}
-    >
-      {/* Ambient accent radial glow */}
-      <div
-        className="pointer-events-none absolute -top-10 -right-10 h-44 w-44 rounded-full blur-3xl opacity-35 transition-transform duration-700 group-hover:scale-125"
-        style={{ backgroundColor: project.accentColor }}
-      />
+  const imagePosition = project.imagePosition ?? 'object-center';
 
-      {/* Top micro browser / header bar */}
-      <div
-        className={`relative z-10 flex items-center justify-between gap-2 ${
-          inModal ? 'pr-14' : ''
-        }`}
-      >
-        <div className="flex items-center gap-1.5">
+  // Compact orbiting tile (Footer 108x108 ring)
+  if (compact) {
+    return (
+      <div className={`relative w-full h-full overflow-hidden ${fallbackBg}`}>
+        <img
+          src={project.image}
+          alt={project.imageAlt}
+          loading="lazy"
+          decoding="async"
+          className={`absolute inset-0 h-full w-full object-cover ${imagePosition} transition-transform duration-700 ease-out group-hover:scale-110`}
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/15" />
+        <div className="relative z-10 flex h-full flex-col justify-between p-2.5 text-left">
           <span
-            className="h-2 w-2 rounded-full"
+            className="h-2 w-2 rounded-full ring-2 ring-black/40"
             style={{ backgroundColor: project.accentColor }}
           />
-          <span
-            className={`text-[10px] font-medium uppercase tracking-[0.14em] ${
-              isLight ? 'text-black/55' : 'text-white/55'
-            }`}
-          >
+          <span className="font-display text-[9px] font-medium uppercase tracking-[0.12em] text-white/95 truncate drop-shadow-sm">
             {project.title}
           </span>
         </div>
-        {!compact && (
-          <span
-            className={`text-[10px] px-2 py-0.5 rounded-full border ${
-              isLight
-                ? 'border-black/10 text-black/60 bg-black/[0.03]'
-                : 'border-white/10 text-white/60 bg-white/[0.04]'
-            }`}
-          >
-            {project.year}
-          </span>
-        )}
       </div>
+    );
+  }
 
-      {/* Center bespoke UI composition per mockupType */}
-      <div className={`relative z-10 my-auto py-3 ${inModal ? 'pr-12' : ''}`}>
-        {project.mockupType === 'fashion' && (
-          <div className="space-y-2.5">
-            <div className="flex items-center justify-between border-b border-current/10 pb-2">
-              <span className="text-[9px] tracking-[0.22em] uppercase opacity-60">
-                NEW SEASON · ARCHIVE
-              </span>
-              <span className="text-[9px] font-semibold uppercase tracking-widest">
-                01 / 08
-              </span>
-            </div>
-            <div className="grid grid-cols-5 gap-2 items-end">
-              <div className="col-span-3">
-                <p className="text-lg sm:text-xl font-light tracking-tight leading-[1.02]">
-                  {project.title === 'VYRN'
-                    ? 'FORM MEETS MOTION.'
-                    : 'WHAT’S INSIDE MATTERS.'}
-                </p>
-              </div>
-              <div
-                className="col-span-2 aspect-[3/4] rounded-lg border border-current/15 flex items-end p-2"
-                style={{
-                  background: `linear-gradient(155deg, ${project.accentColor}45, ${project.secondaryColor})`,
-                }}
-              >
-                <div className="w-full h-1.5 rounded-full bg-current/30" />
-              </div>
-            </div>
-          </div>
-        )}
+  // Case-Study Modal hero banner (wide 880x288 crop)
+  if (inModal) {
+    return (
+      <div className="relative w-full h-full overflow-hidden bg-[#0b0d13] text-[#F8FAFC]">
+        <img
+          src={project.image}
+          alt={project.imageAlt}
+          loading="eager"
+          decoding="async"
+          className={`absolute inset-0 h-full w-full object-cover ${imagePosition}`}
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0d0d0d] via-[#0d0d0d]/35 to-black/40" />
+        <div
+          className="pointer-events-none absolute -top-12 -right-12 h-52 w-52 rounded-full blur-3xl opacity-30"
+          style={{ backgroundColor: project.accentColor }}
+        />
 
-        {project.mockupType === 'saas' && (
-          <div className="space-y-2.5">
-            <div
-              className={`rounded-xl border p-3 ${
-                isLight
-                  ? 'bg-white border-black/10 shadow-sm'
-                  : 'bg-white/[0.04] border-white/10'
-              }`}
-            >
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-[10px] font-medium opacity-70">
-                  Live Decision Telemetry
-                </span>
-                <span
-                  className="text-[10px] font-semibold px-1.5 py-0.5 rounded"
-                  style={{
-                    backgroundColor: `${project.accentColor}22`,
-                    color: isLight ? '#000' : project.accentColor,
-                  }}
-                >
-                  +42.8%
-                </span>
-              </div>
-              {/* Mini bar visualization */}
-              <div className="flex items-end gap-1.5 h-14 pt-2">
-                {[38, 62, 48, 84, 70, 96, 88].map((h, i) => (
-                  <div
-                    key={i}
-                    className="flex-1 rounded-t-sm transition-all duration-500 group-hover:opacity-100"
-                    style={{
-                      height: `${h}%`,
-                      backgroundColor:
-                        i >= 5
-                          ? project.accentColor
-                          : isLight
-                          ? 'rgba(0,0,0,0.14)'
-                          : 'rgba(255,255,255,0.18)',
-                    }}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {project.mockupType === 'ai' && (
-          <div className="space-y-2.5">
-            <p className="text-base sm:text-lg font-normal tracking-tight leading-snug">
-              {project.title === 'Sagewell'
-                ? 'The model that thinks before it speaks.'
-                : 'Autonomous intelligence, human aesthetic.'}
-            </p>
-            <div
-              className={`rounded-xl border p-2.5 text-[10px] flex items-center justify-between ${
-                isLight
-                  ? 'bg-white border-black/10 shadow-sm'
-                  : 'bg-black/60 border-white/10'
-              }`}
-            >
-              <div className="flex items-center gap-2">
-                <span
-                  className="h-2 w-2 rounded-full animate-pulse"
-                  style={{ backgroundColor: project.accentColor }}
-                />
-                <span className="opacity-75">Reasoning step 03 verified</span>
-              </div>
-              <span className="font-mono text-[9px] opacity-50">0.42s</span>
-            </div>
-          </div>
-        )}
-
-        {project.mockupType === 'travel' && (
-          <div className="space-y-2">
-            <div className="text-xl sm:text-2xl font-light tracking-[-0.04em] leading-none">
-              {project.title}
-            </div>
-            <p className="text-[11px] opacity-70">{project.tagline}</p>
-            <div className="flex gap-1.5 pt-1">
-              {['TYO', 'ZRH', 'NYC'].map((code, i) => (
-                <span
-                  key={code}
-                  className={`px-2 py-1 rounded-md text-[9px] font-mono border ${
-                    i === 1
-                      ? 'border-current bg-current/10'
-                      : 'border-current/15 opacity-60'
-                  }`}
-                >
-                  {code}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {project.mockupType === 'architecture' && (
-          <div className="space-y-2">
-            <div className="grid grid-cols-3 gap-1.5">
-              <div
-                className="col-span-2 h-20 rounded-lg border border-white/10 p-2 flex flex-col justify-end"
-                style={{
-                  background: `radial-gradient(circle at 70% 20%, ${project.accentColor}65, rgba(15,12,10,0.95))`,
-                }}
-              >
-                <span className="text-[9px] tracking-[0.2em] uppercase text-white/75">
-                  SPATIAL STUDY
-                </span>
-              </div>
-              <div className="h-20 rounded-lg border border-white/10 bg-white/[0.04] flex items-center justify-center">
-                <div
-                  className="h-8 w-8 rounded-full blur-[1px]"
-                  style={{
-                    background: `radial-gradient(circle, ${project.accentColor}, transparent 70%)`,
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-        )}
-
-        {(project.mockupType === 'editorial' ||
-          project.mockupType === 'agency' ||
-          project.mockupType === 'cinema' ||
-          project.mockupType === 'brand' ||
-          project.mockupType === 'ecommerce') && (
-          <div className="space-y-2">
-            <p className="text-lg sm:text-xl font-light tracking-[-0.03em] leading-[1.08]">
-              {project.tagline}
-            </p>
-            <div className="flex items-center gap-2 pt-1">
-              <div
-                className="h-[2px] w-10 rounded-full"
+        <div className="relative z-10 flex h-full flex-col justify-between p-5 sm:p-7">
+          <div className="flex items-center gap-2 pr-14">
+            <span className="inline-flex items-center gap-2 rounded-full bg-black/55 backdrop-blur-md border border-white/15 px-3 py-1 text-[10.5px] font-display font-medium uppercase tracking-[0.16em] text-white/90">
+              <span
+                className="h-2 w-2 rounded-full"
                 style={{ backgroundColor: project.accentColor }}
               />
-              <span className="text-[10px] uppercase tracking-[0.16em] opacity-60">
-                {project.category}
-              </span>
-            </div>
+              {project.title}
+            </span>
+            <span className="inline-flex items-center rounded-full bg-black/50 backdrop-blur-md border border-white/15 px-2.5 py-1 text-[10px] font-mono text-white/75">
+              {project.year}
+            </span>
           </div>
-        )}
+
+          <p className="font-display max-w-[560px] text-lg sm:text-xl font-normal tracking-[-0.025em] leading-snug text-white/95 drop-shadow-[0_2px_12px_rgba(0,0,0,0.65)]">
+            {project.tagline}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  // Default Selected Works Showcase card
+  return (
+    <div
+      className={`relative w-full h-full overflow-hidden flex flex-col justify-between p-4 ${fallbackBg}`}
+    >
+      {/* Full-bleed bespoke editorial photograph */}
+      <img
+        src={project.image}
+        alt={project.imageAlt}
+        loading="lazy"
+        decoding="async"
+        className={`absolute inset-0 h-full w-full object-cover ${imagePosition} transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]`}
+      />
+
+      {/* Top protective atmospheric veil */}
+      <div
+        className={`pointer-events-none absolute inset-x-0 top-0 h-[34%] ${
+          isLight
+            ? 'bg-gradient-to-b from-white/85 via-white/35 to-transparent'
+            : 'bg-gradient-to-b from-black/75 via-black/25 to-transparent'
+        }`}
+      />
+
+      {/* Bottom editorial caption gradient scrim — leaves middle photography unobstructed */}
+      <div
+        className={`pointer-events-none absolute inset-x-0 bottom-0 h-[52%] ${
+          isLight
+            ? 'bg-gradient-to-t from-[#F8FAFC]/96 via-[#F8FAFC]/75 to-transparent'
+            : 'bg-gradient-to-t from-[#06070A]/96 via-[#06070A]/68 to-transparent'
+        }`}
+      />
+
+      {/* Subtle hover accent glow */}
+      <div
+        className="pointer-events-none absolute -bottom-10 -right-10 h-40 w-40 rounded-full blur-3xl opacity-0 transition-opacity duration-500 group-hover:opacity-30"
+        style={{ backgroundColor: project.accentColor }}
+      />
+
+      {/* Inner editorial hairline frame */}
+      <div
+        className={`pointer-events-none absolute inset-0 rounded-[inherit] ring-1 ring-inset ${
+          isLight ? 'ring-black/[0.08]' : 'ring-white/[0.08]'
+        }`}
+      />
+
+      {/* Top micro header bar */}
+      <div className="relative z-10 flex items-center justify-between gap-2">
+        <div
+          className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 backdrop-blur-md border ${
+            isLight
+              ? 'bg-white/75 border-black/10 text-[#0F172A]'
+              : 'bg-black/45 border-white/15 text-white'
+          }`}
+        >
+          <span
+            className="h-2 w-2 shrink-0 rounded-full"
+            style={{ backgroundColor: project.accentColor }}
+          />
+          <span className="font-display text-[10px] font-semibold uppercase tracking-[0.14em] truncate">
+            {project.title}
+          </span>
+        </div>
+
+        <span
+          className={`text-[10px] font-mono px-2.5 py-1 rounded-full backdrop-blur-md border ${
+            isLight
+              ? 'border-black/10 text-[#0F172A]/75 bg-white/75'
+              : 'border-white/15 text-white/80 bg-black/45'
+          }`}
+        >
+          {project.year}
+        </span>
       </div>
 
-      {/* Bottom hover bar */}
-      {!compact && (
-        <div className="relative z-10 flex items-center justify-between pt-2 border-t border-current/10">
-          <span className="text-[11px] opacity-65 truncate pr-2">
+      {/* Bottom editorial caption & metadata row */}
+      <div className="relative z-10 mt-auto space-y-2.5">
+        <p
+          className={`font-display text-[15px] sm:text-[16.5px] font-normal tracking-[-0.025em] leading-[1.22] line-clamp-2 ${
+            isLight ? 'text-[#0F172A]' : 'text-[#F8FAFC]'
+          }`}
+        >
+          {project.tagline}
+        </p>
+
+        <div
+          className={`flex items-center justify-between pt-2.5 border-t ${
+            isLight ? 'border-black/12' : 'border-white/15'
+          }`}
+        >
+          <span
+            className={`text-[11px] font-medium truncate pr-2 ${
+              isLight ? 'text-[#334155]' : 'text-white/75'
+            }`}
+          >
             {project.category}
           </span>
           <span
-            className={`inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full transition-all duration-300 group-hover:scale-110 ${
+            className={`inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full transition-all duration-300 group-hover:scale-105 ${
               isLight
-                ? 'bg-black text-white'
-                : 'bg-white text-black'
+                ? 'bg-[#0F172A] text-white group-hover:bg-[#FF334B]'
+                : 'bg-white text-[#0F172A] group-hover:bg-[#FF334B] group-hover:text-white'
             }`}
           >
-            <ArrowUpRight className="w-3.5 h-3.5" />
+            <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </span>
         </div>
-      )}
+      </div>
     </div>
   );
 };

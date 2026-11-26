@@ -39,6 +39,9 @@ export interface ProjectItem {
     | 'brand';
   year: string;
   aspectClass: string;
+  image: string;
+  imageAlt: string;
+  imagePosition?: string;
 }
 
 export interface ServiceRow {
@@ -135,6 +138,9 @@ export const PROJECTS: ProjectItem[] = [
     mockupType: 'fashion',
     year: '2026',
     aspectClass: 'aspect-[4/5]',
+    image: '/images/projects/siaara.jpg',
+    imageAlt:
+      'Macro luxury editorial drapery of handcrafted espresso-bronze and antique gold zari silk saree fabric',
   },
   {
     id: 'tidings',
@@ -160,6 +166,9 @@ export const PROJECTS: ProjectItem[] = [
     mockupType: 'saas',
     year: '2026',
     aspectClass: 'aspect-[4/4.2]',
+    image: '/images/projects/tidings.jpg',
+    imageAlt:
+      'Frosted obsidian glass conversational cards edged with luminous crimson rim lighting',
   },
   {
     id: 'hidden-stories',
@@ -185,6 +194,9 @@ export const PROJECTS: ProjectItem[] = [
     mockupType: 'architecture',
     year: '2025',
     aspectClass: 'aspect-[4/5]',
+    image: '/images/projects/hidden-stories.jpg',
+    imageAlt:
+      'Minimalist concrete and travertine desert villa archway bathed in warm golden late-afternoon shadows',
   },
   {
     id: 'aivinci',
@@ -210,6 +222,9 @@ export const PROJECTS: ProjectItem[] = [
     mockupType: 'ai',
     year: '2026',
     aspectClass: 'aspect-[4/4.6]',
+    image: '/images/projects/aivinci.jpg',
+    imageAlt:
+      'Sculptural obsidian and glass fluid ribbons illuminated by molten amber-orange light',
   },
 
   // Column 2
@@ -237,6 +252,9 @@ export const PROJECTS: ProjectItem[] = [
     mockupType: 'travel',
     year: '2026',
     aspectClass: 'aspect-[4/4.3]',
+    image: '/images/projects/aeroskys.jpg',
+    imageAlt:
+      'Serene aerial view of a white aircraft wingtip gliding above sunlit clouds beneath a pale ice-blue sky',
   },
   {
     id: 'vantline',
@@ -262,6 +280,9 @@ export const PROJECTS: ProjectItem[] = [
     mockupType: 'saas',
     year: '2026',
     aspectClass: 'aspect-[4/5.1]',
+    image: '/images/projects/vantline.jpg',
+    imageAlt:
+      'Staggered smoked-glass monoliths and matte-black aluminum fins illuminated by sharp acid-lime edge lighting',
   },
   {
     id: 'livecv',
@@ -287,6 +308,9 @@ export const PROJECTS: ProjectItem[] = [
     mockupType: 'editorial',
     year: '2025',
     aspectClass: 'aspect-[4/4.5]',
+    image: '/images/projects/livecv.jpg',
+    imageAlt:
+      'Monochrome editorial still-life of matte-black and ivory portfolio cards with brushed steel pen and glass prism on dark slate',
   },
   {
     id: 'vesper',
@@ -312,6 +336,9 @@ export const PROJECTS: ProjectItem[] = [
     mockupType: 'architecture',
     year: '2026',
     aspectClass: 'aspect-[4/4.8]',
+    image: '/images/projects/vesper.jpg',
+    imageAlt:
+      'Sculptural curving architectural gallery corridor illuminated by warm amber cove lighting and soft shadows',
   },
 
   // Column 3
@@ -339,6 +366,9 @@ export const PROJECTS: ProjectItem[] = [
     mockupType: 'agency',
     year: '2025',
     aspectClass: 'aspect-[4/4.8]',
+    image: '/images/projects/san-media.jpg',
+    imageAlt:
+      'Matte-black anamorphic cinema camera lens and matte-box rim-lit with electric crimson light in a dark studio',
   },
   {
     id: 'emberpost',
@@ -364,6 +394,9 @@ export const PROJECTS: ProjectItem[] = [
     mockupType: 'editorial',
     year: '2026',
     aspectClass: 'aspect-[4/4.1]',
+    image: '/images/projects/emberpost.jpg',
+    imageAlt:
+      'Folded artisanal cotton stationery on cream limestone with a burnt-orange woven ribbon and morning window shadows',
   },
   {
     id: 'vyrn',
@@ -389,6 +422,10 @@ export const PROJECTS: ProjectItem[] = [
     mockupType: 'fashion',
     year: '2026',
     aspectClass: 'aspect-[4/5.2]',
+    image: '/images/projects/vyrn.jpg',
+    imageAlt:
+      'High-contrast monochrome studio lookbook editorial of an oversized matte-black architectural streetwear coat in motion',
+    imagePosition: 'object-[50%_20%]',
   },
   {
     id: 'finsmith',
@@ -414,6 +451,9 @@ export const PROJECTS: ProjectItem[] = [
     mockupType: 'brand',
     year: '2025',
     aspectClass: 'aspect-[4/4.4]',
+    image: '/images/projects/finsmith.jpg',
+    imageAlt:
+      'Swiss minimalist still-life of matte-white geometric blocks, blank cotton cards, silver bar, and emerald-green anodized cube',
   },
 
   // Column 4
@@ -441,6 +481,9 @@ export const PROJECTS: ProjectItem[] = [
     mockupType: 'ai',
     year: '2026',
     aspectClass: 'aspect-[4/4.7]',
+    image: '/images/projects/sagewell.jpg',
+    imageAlt:
+      'High-key studio sculpture of crystal optical glass prisms, polished obsidian sphere, and frosted alabaster cube with soft light caustics',
   },
   {
     id: 'vynk-network',
@@ -466,6 +509,9 @@ export const PROJECTS: ProjectItem[] = [
     mockupType: 'travel',
     year: '2026',
     aspectClass: 'aspect-[4/4.3]',
+    image: '/images/projects/vynk-network.jpg',
+    imageAlt:
+      'Matte-black beveled eSIM microchip monolith suspended inside glowing indigo-violet orbital light rings',
   },
   {
     id: 'ines-morrow',
@@ -491,6 +537,9 @@ export const PROJECTS: ProjectItem[] = [
     mockupType: 'cinema',
     year: '2025',
     aspectClass: 'aspect-[4/4.9]',
+    image: '/images/projects/ines-morrow.jpg',
+    imageAlt:
+      'Translucent 35mm celluloid film strips curling over a dark editing table with ruby-crimson anamorphic underglow',
   },
   {
     id: 'velora',
@@ -516,6 +565,9 @@ export const PROJECTS: ProjectItem[] = [
     mockupType: 'ecommerce',
     year: '2026',
     aspectClass: 'aspect-[4/4.6]',
+    image: '/images/projects/velora.jpg',
+    imageAlt:
+      'Sculptural smoked-glass luxury perfume flacon reflecting warm amber light against a dark moody stone backdrop',
   },
 ];
 
