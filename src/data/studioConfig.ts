@@ -92,7 +92,7 @@ export const STUDIO_BRAND: StudioBrand = {
     'Combining product design, interactive engineering, and applied AI workflows, Sathya partners directly with founders and teams to transform complex ideas into intuitive, unmistakable experiences.',
     'Every build is designed for real human clarity first — and measurable business momentum second.',
   ],
-  email: 'hello@zeroonestudio.pro',
+  email: 'sksathya009@gmail.com',
   tagline: 'Digital experiences, built around you.',
   heroPills: [
     'Simple for people. Powerful for business.',

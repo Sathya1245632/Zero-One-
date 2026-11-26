@@ -40,9 +40,33 @@ export const ContactModal: React.FC<ContactModalProps> = ({
     );
   };
 
+  const buildMailtoHref = () => {
+    const servicesText = selectedServices.join(', ') || 'Custom Project';
+    const subject = `Project Inquiry · ${name.trim()}${
+      company.trim() ? ` (${company.trim()})` : ''
+    }`;
+    const bodyLines = [
+      `Hi ${STUDIO_BRAND.founderName},`,
+      '',
+      brief.trim() || 'I would like to discuss a new project.',
+      '',
+      '--- Project Details ---',
+      `Name: ${name.trim()}`,
+      `Email: ${email.trim()}`,
+      company.trim() ? `Company / Brand: ${company.trim()}` : null,
+      `Scope: ${servicesText}`,
+      `Target Timeline: ${timeline}`,
+    ].filter((line): line is string => line !== null);
+
+    return `mailto:${STUDIO_BRAND.email}?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !email.trim()) return;
+    window.location.href = buildMailtoHref();
     setSubmitted(true);
   };
 
@@ -122,10 +146,23 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                   <span className="text-white font-medium">
                     {selectedServices.join(', ') || 'Custom Project'}
                   </span>
-                  . {STUDIO_BRAND.founderName} will review your notes and reply
-                  to <span className="text-white">{email}</span> directly.
+                  . Your email client has been opened addressed to{' '}
+                  <a
+                    href={buildMailtoHref()}
+                    className="text-white underline"
+                  >
+                    {STUDIO_BRAND.email}
+                  </a>{' '}
+                  so {STUDIO_BRAND.founderName} can reply to{' '}
+                  <span className="text-white">{email}</span> directly.
                 </p>
-                <div className="pt-2">
+                <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+                  <a
+                    href={buildMailtoHref()}
+                    className="rounded-full border border-white/20 bg-white/[0.06] text-white px-5 py-2.5 text-sm font-medium hover:bg-white/15 transition-colors"
+                  >
+                    Email {STUDIO_BRAND.email}
+                  </a>
                   <button
                     onClick={resetAndClose}
                     className="rounded-full bg-white text-black px-6 py-2.5 text-sm font-medium hover:bg-white/90 transition-colors"
